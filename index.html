@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CD Tracking App</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="CD Tracker" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="apple-touch-icon.png" />
   <style>
     :root {
       --bg: #f4f7fb;
@@ -17,42 +21,35 @@
       --border: #d9e2ef;
       --shadow: 0 8px 24px rgba(20, 35, 60, 0.10);
     }
-
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
-
     header {
       background: linear-gradient(135deg, #123b8c, #1d5cff);
       color: white;
       padding: 24px 18px 30px;
       text-align: center;
     }
-
     header h1 {
       margin: 0 0 8px;
       font-size: 28px;
     }
-
     header p {
       margin: 0;
       opacity: 0.92;
       font-size: 15px;
     }
-
     main {
       max-width: 1100px;
       margin: -18px auto 40px;
       padding: 0 14px;
     }
-
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -61,38 +58,32 @@
       padding: 16px;
       margin-bottom: 16px;
     }
-
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
-
     .summary-box {
       background: #f8fbff;
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
     }
-
     .summary-box .label {
       color: var(--muted);
       font-size: 13px;
       margin-bottom: 6px;
     }
-
     .summary-box .value {
       font-size: 22px;
       font-weight: 800;
     }
-
     form {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 10px;
       align-items: end;
     }
-
     label {
       display: block;
       font-size: 13px;
@@ -100,7 +91,6 @@
       margin-bottom: 5px;
       font-weight: 600;
     }
-
     input, select, button {
       width: 100%;
       border-radius: 12px;
@@ -109,7 +99,6 @@
       font-size: 16px;
       background: white;
     }
-
     button {
       border: none;
       background: var(--blue);
@@ -117,54 +106,45 @@
       font-weight: 800;
       cursor: pointer;
     }
-
     button.secondary {
       background: #edf3ff;
       color: #1740a2;
       border: 1px solid #cbdcff;
     }
-
     button.danger {
       background: #fff0f0;
       color: var(--red);
       border: 1px solid #ffc9c9;
     }
-
     button.green {
       background: #e9fff3;
       color: var(--green);
       border: 1px solid #bff0d4;
     }
-
     h2 {
       margin: 0 0 12px;
       font-size: 20px;
     }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
     .small-note {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.35;
     }
-
+    .save-status {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 8px;
+      display: none;
+    }
     .table-wrap {
       overflow-x: auto;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       min-width: 900px;
     }
-
     th, td {
       text-align: left;
       padding: 11px 9px;
@@ -172,17 +152,13 @@
       vertical-align: middle;
       font-size: 14px;
     }
-
     th {
       color: var(--muted);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       background: #f8fbff;
-      position: sticky;
-      top: 0;
     }
-
     .pill {
       display: inline-block;
       border-radius: 999px;
@@ -191,33 +167,27 @@
       font-weight: 800;
       white-space: nowrap;
     }
-
     .pill.open {
       background: #e9fff3;
       color: var(--green);
     }
-
     .pill.matured {
       background: #fff7e6;
       color: var(--gold);
     }
-
     .pill.closed {
       background: #eef2f7;
       color: #46556b;
     }
-
     .actions {
       display: flex;
       gap: 6px;
       min-width: 190px;
     }
-
     .actions button {
       padding: 8px 10px;
       font-size: 13px;
     }
-
     .empty {
       padding: 18px;
       color: var(--muted);
@@ -226,32 +196,11 @@
       border-radius: 14px;
       background: #fbfdff;
     }
-
     .footer-buttons {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
-
-    @media (max-width: 850px) {
-      .summary-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      form {
-        grid-template-columns: 1fr;
-      }
-
-      header h1 {
-        font-size: 24px;
-      }
-
-      .summary-box .value {
-        font-size: 19px;
-      }
-    }
-
-
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -262,7 +211,6 @@
       padding: 18px;
       z-index: 9999;
     }
-
     .modal {
       width: 100%;
       max-width: 390px;
@@ -272,46 +220,45 @@
       padding: 18px;
       border: 1px solid var(--border);
     }
-
     .modal h3 {
       margin: 0 0 8px;
       font-size: 20px;
     }
-
     .modal p {
       margin: 0 0 16px;
       color: var(--muted);
       line-height: 1.4;
     }
-
     .modal-actions {
       display: flex;
       gap: 10px;
     }
-
-    .save-status {
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 700;
-      margin-top: 8px;
-      display: none;
+    @media (max-width: 850px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      form {
+        grid-template-columns: 1fr;
+      }
+      header h1 {
+        font-size: 24px;
+      }
+      .summary-box .value {
+        font-size: 19px;
+      }
     }
-
     @media print {
       header, form, .footer-buttons, .actions {
         display: none !important;
       }
-
       main {
         margin: 0;
         max-width: none;
       }
-
       .card {
         box-shadow: none;
         border: 1px solid #aaa;
       }
-
       body {
         background: white;
       }
@@ -323,7 +270,6 @@
     <h1>CD Tracking App</h1>
     <p>Track bank CDs, maturity dates, monthly accrual, and yearly expected interest.</p>
   </header>
-
   <main>
     <section class="card">
       <div class="summary-grid">
@@ -331,172 +277,104 @@
           <div class="label">Total Open Deposits</div>
           <div class="value" id="totalDeposits">$0.00</div>
         </div>
-        <div class="summary-box">
-          <div class="label">Monthly Accrued Estimate</div>
-          <div class="value" id="monthlyAccrued">$0.00</div>
-        </div>
-        <div class="summary-box">
-          <div class="label">Expected Interest This Year</div>
-          <div class="value" id="yearlyExpected">$0.00</div>
-        </div>
-        <div class="summary-box">
-          <div class="label">Expected Value at Maturity</div>
-          <div class="value" id="totalMaturity">$0.00</div>
-        </div>
-      </div>
-      <p class="small-note" style="margin-bottom:0;">
-        Estimates use APY compounding monthly. “Expected Interest This Year” only counts open CDs through the earlier of December 31 or each CD’s maturity date.
-      </p>
-      <div id="saveStatus" class="save-status">Saved on this browser.</div>
-    </section>
-
-    <section class="card">
-      <h2>Add a CD Account</h2>
-      <form id="cdForm">
-        <div>
-          <label for="bankName">Bank Name</label>
-          <input id="bankName" type="text" placeholder="Example: Ally Bank" required />
-        </div>
-
-        <div>
-          <label for="amount">Amount Deposited</label>
-          <input id="amount" type="number" min="0" step="0.01" placeholder="50000" required />
-        </div>
-
-        <div>
-          <label for="apy">APY %</label>
-          <input id="apy" type="number" min="0" step="0.001" placeholder="4.25" required />
-        </div>
-
-        <div>
-          <label for="openDate">Open Date</label>
-          <input id="openDate" type="date" required />
-        </div>
-
-        <div>
-          <label for="termMonths">Term</label>
-          <select id="termMonths" required>
-            <option value="1">1 Month</option>
-            <option value="2">2 Months</option>
-            <option value="3">3 Months</option>
-            <option value="4">4 Months</option>
-            <option value="5">5 Months</option>
-            <option value="6">6 Months</option>
-            <option value="7">7 Months</option>
-            <option value="8">8 Months</option>
-            <option value="9">9 Months</option>
-            <option value="10">10 Months</option>
-            <option value="11">11 Months</option>
-            <option value="12" selected>12 Months</option>
-            <option value="13">13 Months</option>
-            <option value="14">14 Months</option>
-            <option value="15">15 Months</option>
-            <option value="16">16 Months</option>
-            <option value="17">17 Months</option>
-            <option value="18">18 Months</option>
-            <option value="19">19 Months</option>
-            <option value="20">20 Months</option>
-            <option value="21">21 Months</option>
-            <option value="22">22 Months</option>
-            <option value="23">23 Months</option>
-            <option value="24">24 Months</option>
-            <option value="25">25 Months</option>
-            <option value="26">26 Months</option>
-            <option value="27">27 Months</option>
-            <option value="28">28 Months</option>
-            <option value="29">29 Months</option>
-            <option value="30">30 Months</option>
-            <option value="31">31 Months</option>
-            <option value="32">32 Months</option>
-            <option value="33">33 Months</option>
-            <option value="34">34 Months</option>
-            <option value="35">35 Months</option>
-            <option value="36">36 Months</option>
-            <option value="37">37 Months</option>
-            <option value="38">38 Months</option>
-            <option value="39">39 Months</option>
-            <option value="40">40 Months</option>
-            <option value="41">41 Months</option>
-            <option value="42">42 Months</option>
-            <option value="43">43 Months</option>
-            <option value="44">44 Months</option>
-            <option value="45">45 Months</option>
-            <option value="46">46 Months</option>
-            <option value="47">47 Months</option>
-            <option value="48">48 Months</option>
-            <option value="49">49 Months</option>
-            <option value="50">50 Months</option>
-            <option value="51">51 Months</option>
-            <option value="52">52 Months</option>
-            <option value="53">53 Months</option>
-            <option value="54">54 Months</option>
-            <option value="55">55 Months</option>
-            <option value="56">56 Months</option>
-            <option value="57">57 Months</option>
-            <option value="58">58 Months</option>
-            <option value="59">59 Months</option>
-            <option value="60">60 Months</option>
-          </select>
-        </div>
-
-        <div>
-          <button type="submit">Add CD</button>
-        </div>
-      </form>
-    </section>
-
-    <section class="card">
-      <div class="section-header">
-        <div>
-          <h2>Open CDs</h2>
-          <div class="small-note">Matured CDs can be closed and moved below the open-CD totals.</div>
-        </div>
-      </div>
-      <div id="openCds"></div>
-    </section>
-
-    <section class="card">
-      <div class="section-header">
-        <div>
-          <h2>Closed / Matured CDs</h2>
-          <div class="small-note">CDs you close out will stay here for your records.</div>
-        </div>
-      </div>
-      <div id="closedCds"></div>
-    </section>
-
-    <section class="card">
-      <div class="footer-buttons">
-        <button class="secondary" onclick="window.print()">Print / Save as PDF</button>
-        <button class="secondary" onclick="exportData()">Export Backup</button>
-        <button class="secondary" onclick="document.getElementById('importFile').click()">Import Backup</button>
-        <button class="danger" onclick="clearAll()">Clear All Data</button>
-        <input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)" />
-      </div>
-    </section>
-
-    <div id="confirmModal" class="modal-backdrop">
-      <div class="modal">
-        <h3 id="confirmTitle">Confirm</h3>
-        <p id="confirmMessage">Are you sure?</p>
-        <div class="modal-actions">
-          <button class="danger" id="confirmYes">Yes</button>
-          <button class="secondary" id="confirmNo">Cancel</button>
-        </div>
-      </div>
+    <div class="summary-box">
+      <div class="label">Monthly Accrued Estimate</div>
+      <div class="value" id="monthlyAccrued">$0.00</div>
     </div>
-
+    <div class="summary-box">
+      <div class="label">Expected Interest This Year</div>
+      <div class="value" id="yearlyExpected">$0.00</div>
+    </div>
+    <div class="summary-box">
+      <div class="label">Expected Value at Maturity</div>
+      <div class="value" id="totalMaturity">$0.00</div>
+    </div>
+  </div>
+  <p class="small-note" style="margin-bottom:0;">
+    Estimates use APY compounding monthly. “Expected Interest This Year” only counts open CDs through the earlier of December 31 or each CD’s maturity date.
+  </p>
+  <div id="saveStatus" class="save-status">Saved on this browser.</div>
+</section>
+<section class="card">
+  <h2>Add a CD Account</h2>
+  <form id="cdForm">
+    <div>
+      <label for="bankName">Bank Name</label>
+      <input id="bankName" type="text" placeholder="Example: Ally Bank" required />
+    </div>
+    <div>
+      <label for="amount">Amount Deposited</label>
+      <input id="amount" type="number" min="0" step="0.01" placeholder="50000" required />
+    </div>
+    <div>
+      <label for="apy">APY %</label>
+      <input id="apy" type="number" min="0" step="0.001" placeholder="4.25" required />
+    </div>
+    <div>
+      <label for="openDate">Open Date</label>
+      <input id="openDate" type="date" required />
+    </div>
+    <div>
+      <label for="termMonths">Term</label>
+      <select id="termMonths" required></select>
+    </div>
+    <div>
+      <button type="submit">Add CD</button>
+    </div>
+  </form>
+</section>
+<section class="card">
+  <h2>Open CDs</h2>
+  <div class="small-note">Matured CDs can be closed and moved below the open-CD totals.</div>
+  <br />
+  <div id="openCds"></div>
+</section>
+<section class="card">
+  <h2>Closed / Matured CDs</h2>
+  <div class="small-note">CDs you close out will stay here for your records.</div>
+  <br />
+  <div id="closedCds"></div>
+</section>
+<section class="card">
+  <div class="footer-buttons">
+    <button class="secondary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="secondary" onclick="exportData()">Export Backup</button>
+    <button class="secondary" onclick="document.getElementById('importFile').click()">Import Backup</button>
+    <button class="danger" onclick="clearAll()">Clear All Data</button>
+    <input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)" />
+  </div>
+</section>
+<div id="confirmModal" class="modal-backdrop">
+  <div class="modal">
+    <h3 id="confirmTitle">Confirm</h3>
+    <p id="confirmMessage">Are you sure?</p>
+    <div class="modal-actions">
+      <button class="danger" id="confirmYes">Yes</button>
+      <button class="secondary" id="confirmNo">Cancel</button>
+    </div>
+  </div>
+</div>
   </main>
-
   <script>
-    const STORAGE_KEY = "cdTrackerAccountsV1";
+    const STORAGE_KEY = "cdTrackerAccountsV2";
     let cds = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-
     const money = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD"
     });
-
+    function buildTermOptions() {
+      const select = document.getElementById("termMonths");
+      select.innerHTML = "";
+      for (let month = 1; month <= 60; month++) {
+        const option = document.createElement("option");
+        option.value = month;
+        option.textContent = month + " Month" + (month === 1 ? "" : "s");
+        if (month === 12) {
+          option.selected = true;
+        }
+        select.appendChild(option);
+      }
+    }
     function save() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cds));
       const status = document.getElementById("saveStatus");
@@ -508,12 +386,10 @@
         }, 1800);
       }
     }
-
     function parseLocalDate(value) {
-      const [year, month, day] = value.split("-").map(Number);
-      return new Date(year, month - 1, day);
+      const parts = value.split("-").map(Number);
+      return new Date(parts[0], parts[1] - 1, parts[2]);
     }
-
     function formatDate(date) {
       return date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -521,39 +397,31 @@
         day: "numeric"
       });
     }
-
     function addMonths(date, months) {
       const result = new Date(date);
       const originalDay = result.getDate();
       result.setMonth(result.getMonth() + months);
-
       if (result.getDate() !== originalDay) {
         result.setDate(0);
       }
-
       return result;
     }
-
     function daysBetween(start, end) {
       const msPerDay = 24 * 60 * 60 * 1000;
       return Math.max(0, Math.round((end - start) / msPerDay));
     }
-
     function monthlyRateFromAPY(apyPercent) {
       return Math.pow(1 + apyPercent / 100, 1 / 12) - 1;
     }
-
     function valueAfterMonths(principal, apyPercent, months) {
       const monthlyRate = monthlyRateFromAPY(apyPercent);
       return principal * Math.pow(1 + monthlyRate, months);
     }
-
     function estimatedInterestBetween(principal, apyPercent, start, end) {
       const days = daysBetween(start, end);
       const annualRate = apyPercent / 100;
       return principal * annualRate * (days / 365);
     }
-
     function getCdDetails(cd) {
       const openDate = parseLocalDate(cd.openDate);
       const maturityDate = addMonths(openDate, Number(cd.termMonths));
@@ -563,12 +431,10 @@
       const totalInterest = maturityValue - Number(cd.amount);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-
       let status = cd.status || "open";
       if (status === "open" && maturityDate <= today) {
         status = "matured";
       }
-
       return {
         openDate,
         maturityDate,
@@ -578,39 +444,44 @@
         status
       };
     }
-
     function thisYearExpectedInterest(cd) {
       const details = getCdDetails(cd);
-      if ((cd.status || "open") === "closed") return 0;
-
+      if ((cd.status || "open") === "closed") {
+        return 0;
+      }
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-
       const yearStart = new Date(today.getFullYear(), 0, 1);
       const yearEnd = new Date(today.getFullYear(), 11, 31);
-
       const start = details.openDate > yearStart ? details.openDate : yearStart;
       const end = details.maturityDate < yearEnd ? details.maturityDate : yearEnd;
-
-      if (end <= start) return 0;
-
+      if (end <= start) {
+        return 0;
+      }
       return estimatedInterestBetween(Number(cd.amount), Number(cd.apy), start, end);
     }
-
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, function(match) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        }[match];
+      });
+    }
     function renderTable(items, type) {
       if (items.length === 0) {
         return `<div class="empty">No ${type === "open" ? "open" : "closed"} CDs yet.</div>`;
       }
-
       const rows = items.map(cd => {
         const d = getCdDetails(cd);
         const statusClass = d.status === "closed" ? "closed" : d.status === "matured" ? "matured" : "open";
         const statusLabel = d.status === "closed" ? "Closed" : d.status === "matured" ? "Matured" : "Open";
-
         const closeButton = type === "open"
           ? `<button class="green" onclick="closeCd('${cd.id}')">Close</button>`
           : `<button class="secondary" onclick="reopenCd('${cd.id}')">Reopen</button>`;
-
         return `
           <tr>
             <td><strong>${escapeHtml(cd.bankName)}</strong></td>
@@ -632,7 +503,6 @@
           </tr>
         `;
       }).join("");
-
       return `
         <div class="table-wrap">
           <table>
@@ -656,16 +526,13 @@
         </div>
       `;
     }
-
     function render() {
       const openItems = cds.filter(cd => (cd.status || "open") !== "closed");
       const closedItems = cds.filter(cd => (cd.status || "open") === "closed");
-
       let totalDeposits = 0;
       let monthlyAccrued = 0;
       let yearlyExpected = 0;
       let totalMaturity = 0;
-
       openItems.forEach(cd => {
         const d = getCdDetails(cd);
         totalDeposits += Number(cd.amount);
@@ -673,33 +540,16 @@
         yearlyExpected += thisYearExpectedInterest(cd);
         totalMaturity += d.maturityValue;
       });
-
       document.getElementById("totalDeposits").textContent = money.format(totalDeposits);
       document.getElementById("monthlyAccrued").textContent = money.format(monthlyAccrued);
       document.getElementById("yearlyExpected").textContent = money.format(yearlyExpected);
       document.getElementById("totalMaturity").textContent = money.format(totalMaturity);
-
       document.getElementById("openCds").innerHTML = renderTable(openItems, "open");
       document.getElementById("closedCds").innerHTML = renderTable(closedItems, "closed");
-
       save();
     }
-
-    function escapeHtml(text) {
-      return String(text).replace(/[&<>"']/g, function(match) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        }[match];
-      });
-    }
-
     document.getElementById("cdForm").addEventListener("submit", function(event) {
       event.preventDefault();
-
       const cd = {
         id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
         bankName: document.getElementById("bankName").value.trim(),
@@ -709,66 +559,77 @@
         termMonths: Number(document.getElementById("termMonths").value),
         status: "open"
       };
-
       cds.push(cd);
       event.target.reset();
       document.getElementById("termMonths").value = "12";
       render();
     });
-
     let pendingConfirmAction = null;
-
     function showConfirm(title, message, onYes) {
       pendingConfirmAction = onYes;
       document.getElementById("confirmTitle").textContent = title;
       document.getElementById("confirmMessage").textContent = message;
       document.getElementById("confirmModal").style.display = "flex";
     }
-
     document.getElementById("confirmYes").addEventListener("click", function() {
       document.getElementById("confirmModal").style.display = "none";
-      if (pendingConfirmAction) pendingConfirmAction();
+      if (pendingConfirmAction) {
+        pendingConfirmAction();
+      }
       pendingConfirmAction = null;
     });
-
     document.getElementById("confirmNo").addEventListener("click", function() {
       document.getElementById("confirmModal").style.display = "none";
       pendingConfirmAction = null;
     });
-
     document.getElementById("confirmModal").addEventListener("click", function(event) {
       if (event.target.id === "confirmModal") {
         document.getElementById("confirmModal").style.display = "none";
         pendingConfirmAction = null;
       }
     });
-
     function closeCd(id) {
-      cds = cds.map(cd => cd.id === id ? { ...cd, status: "closed", closedDate: new Date().toISOString() } : cd);
+      cds = cds.map(cd => {
+        if (cd.id === id) {
+          return {
+            ...cd,
+            status: "closed",
+            closedDate: new Date().toISOString()
+          };
+        }
+        return cd;
+      });
       render();
     }
-
     function reopenCd(id) {
-      cds = cds.map(cd => cd.id === id ? { ...cd, status: "open", closedDate: null } : cd);
+      cds = cds.map(cd => {
+        if (cd.id === id) {
+          return {
+            ...cd,
+            status: "open",
+            closedDate: null
+          };
+        }
+        return cd;
+      });
       render();
     }
-
     function deleteCd(id) {
       showConfirm("Delete CD?", "This will remove this CD account from your tracker.", function() {
         cds = cds.filter(cd => cd.id !== id);
         render();
       });
     }
-
     function clearAll() {
       showConfirm("Clear all data?", "This will remove every CD account saved on this browser.", function() {
         cds = [];
         render();
       });
     }
-
     function exportData() {
-      const blob = new Blob([JSON.stringify(cds, null, 2)], { type: "application/json" });
+      const blob = new Blob([JSON.stringify(cds, null, 2)], {
+        type: "application/json"
+      });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -776,16 +637,18 @@
       a.click();
       URL.revokeObjectURL(url);
     }
-
     function importData(event) {
       const file = event.target.files[0];
-      if (!file) return;
-
+      if (!file) {
+        return;
+      }
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
           const imported = JSON.parse(e.target.result);
-          if (!Array.isArray(imported)) throw new Error("Invalid backup file.");
+          if (!Array.isArray(imported)) {
+            throw new Error("Invalid backup file.");
+          }
           cds = imported;
           render();
         } catch (error) {
@@ -794,7 +657,7 @@
       };
       reader.readAsText(file);
     }
-
+    buildTermOptions();
     render();
   </script>
 </body>
